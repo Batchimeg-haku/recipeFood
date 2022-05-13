@@ -1,8 +1,7 @@
-const arr = [24, 43, 22];
+require("@babel/polyfill");
+import Search from "../model/Search";
+// class iin object uusgene
 
-let myfunc = a => {
-    console.log(`too: ${a}`);
-}
-const arr2 = [...arr, 33, 2445];
+let search = new Search("pasta");
 
-myfunc(arr2[1]);
+search.doSearch().then(r => console.log(r));
