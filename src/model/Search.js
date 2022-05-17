@@ -14,11 +14,10 @@ export default class Search{
             this.result = result.data.recipes;
 
             return this.result; 
-
         } catch (error) {
             console.log("error", error);
         }
-}
+    }
 
 
 }
