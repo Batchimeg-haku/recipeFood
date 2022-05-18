@@ -2,6 +2,7 @@ require("@babel/polyfill");
 import Search from "../model/Search";
 import { elements, renderLoader, clearLoader } from "../view/base";
 import * as searchView from "../view/searchView";
+import Recipe from "../model/Recipe";
 
 /*
 Web app төлөв
@@ -29,11 +30,11 @@ const state = {};
         // 4. hailtiig guitsetgene
         await state.search.doSearch();
 
-        // 5. hailtiin ur dun delgetsend haruulna
+        // 5. hailtiin ur delgetsend haruulna
         clearLoader();
         if (state.search.result === undefined)
         {
-            alert("hailt ilertsgui")
+            alert("hailt ilertsgui");
         }
         else
         {
@@ -44,6 +45,20 @@ const state = {};
 
 elements.searchForm.addEventListener("submit", e => {
     e.preventDefault();
-
     controlSearch();
-})
+});
+
+elements.pageButtons.addEventListener("click", e => {
+    //daragdsan towsh oloh
+    const btn = e.target.closest(".btn-inline"); // css elemented hamgiin oirhon baigaa tuhain dom deer baigaa elementiig olj ogdog function
+    
+    if (btn) {
+        const gotoPageNumber = parseInt(btn.dataset.goto, 10);
+        searchView.clearSearchResult();
+        searchView.renderRecipes(state.search.result, gotoPageNumber);
+    }
+});
+
+const r = new Recipe(47746);
+
+r.getRecipe();
